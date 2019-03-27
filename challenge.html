@@ -1,0 +1,43 @@
+﻿<!Name: Kevy Lim>
+<!Isentia code challenge>
+
+<html>
+<head>
+  <title>Flickr feed viewer and search</title>
+</head>
+<body>
+  <div style="text-align:center">
+  <h1>
+    Flickr feed viewer and search
+  </h1>
+  <div class="search-container">
+    
+      <input type="text" placeholder="Search" id="search"> <!user input text>
+      <button id="submit" type="submit" onclick="JavaScriptFetch()">search</button>
+    
+  </div>
+  <br>
+  <br>
+  <div id="outputDiv"></div>
+  </div>
+    
+    <script>
+        /*JavaScript Method-- retrive feed from flikcr*/
+        function JavaScriptFetch() {
+            var script = document.createElement('script');
+            script.src = "https://api.flickr.com/services/feeds/photos_public.gne?format=json&tags=" + document.getElementById("search").value;
+            document.querySelector('head').appendChild(script);
+        }
+        /*JavaScript Method-- function to display pictures*/
+        function jsonFlickrFeed(data) {
+            var image = "";
+            data.items.forEach(function (element) {
+                image += "<img src=\"" + element.media.m + "\"/>";
+            });
+
+            document.getElementById("outputDiv").innerHTML = image;
+        }
+        /*End*/
+    </script>
+</body>
+</html>
